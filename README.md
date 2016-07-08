@@ -14,5 +14,8 @@
 
 #如何使用
 <!--hibiscusMain.py 为主程序，直接运行即可，程序将读取《黑色裂变.txt》并最终输出一个excel-->
-python hibiscusMain.py "path/file"
--->file.xls
+   
+    python hibiscusMain.py "path/file"
+
+    -- > file.xls
+
