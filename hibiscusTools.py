@@ -63,6 +63,7 @@ def calculateFreedom(wordLst):
     for word,wordcount in wordDic.items():
         freedom = freedom - float(wordcount)/float(count)*math.log(float(wordcount)/float(count))
     return freedom
+	
 if __name__ == '__main__':
    lst = [ u'不', u'皮', u'倒', u'皮']
-   print calculateFreedom(lst)
+   print (calculateFreedom(lst))
