@@ -13,5 +13,9 @@
 听起来是不是很高大上呢，哈哈，现在勉强完成了第一步，在此感谢这篇博客的作者 http://www.csdn.net/article/2013-05-08/2815186 ，程序的第一步完全是在实现这篇博客的算法
 
 #如何使用
-hibiscusMain.py 为主程序，直接运行即可，程序将读取《黑色裂变.txt》并最终输出一个excel
+<!--hibiscusMain.py 为主程序，直接运行即可，程序将读取《黑色裂变.txt》并最终输出一个excel-->
+   
+    python hibiscusMain.py "path/file"
+
+    -- > file.xls
 

@@ -9,7 +9,7 @@ import hibiscusTools
 import codecs
 from xlwt import Workbook
 from audioop import reverse
-
+import sys  
 
 class Hibiscus():
     def analyseNovel(self,filename):
@@ -39,7 +39,7 @@ class Hibiscus():
         self.charCount = index
         self.calculte()
         
-    def outExcel(self):
+    def outExcel(self,filename):
         wb = Workbook()
         table = wb.add_sheet(u'新词')
         table.write(0,0,u'单词')
@@ -60,7 +60,7 @@ class Hibiscus():
             table.write(line,2,item['solidification'])
             table.write(line,3,item['freedom'])
             line +=1
-        wb.save('./out.xls')
+        wb.save('./'+os.path.splitext(os.path.basename(filename))[0] +'.xls')
         
     def calculte(self):
         for word,info in self.novelInfo.items():
@@ -88,10 +88,11 @@ class Hibiscus():
         return min
 
 
-def excute():
-    filename = u'./黑色裂变.txt'
+def excute(name):
+    filename = sys.argv[1]
     hibi = Hibiscus()
     hibi.analyseNovel(filename) 
-    hibi.outExcel()  
+    hibi.outExcel(filename)  
+	
 if __name__ == '__main__':
-    excute()
+    excute( sys.argv[1:])
