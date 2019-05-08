@@ -8,15 +8,16 @@ import os
 import hibiscusTools
 import codecs
 from xlwt import Workbook
-from audioop import reverse
 import sys  
+
 
 class Hibiscus():
     def analyseNovel(self,filename):
         if not os.path.exists(filename):
             pass
-        with codecs.open(filename,encoding='gbk') as file:
+        with codecs.open(filename, encoding='GBK') as file:
             content = file.read()
+
         txtlist = hibiscusTools.getAllChineseCharacters(content)
         
         
@@ -41,11 +42,11 @@ class Hibiscus():
         
     def outExcel(self,filename):
         wb = Workbook()
-        table = wb.add_sheet(u'新词')
-        table.write(0,0,u'单词')
-        table.write(0,1,u'出现次数')
-        table.write(0,2,u'凝结度')
-        table.write(0,3,u'自由度')
+        table = wb.add_sheet('新词')
+        table.write(0,0,'单词')
+        table.write(0,1,'出现次数')
+        table.write(0,2,'凝结度')
+        table.write(0,3,'自由度')
         lst = []
         for k,v in self.novelInfo.items():
             if v['count']>30 and len(k)>1 and v['solidification']>50 and v['freedom']>3:
@@ -66,14 +67,15 @@ class Hibiscus():
         for word,info in self.novelInfo.items():
             self.novelInfo[word]['solidification']= self.getSolidification(word)       
             self.novelInfo[word]['freedom'] = self.getFreedom(self.novelInfo[word])
+
     def getFreedom(self,wordinfo):
         leftfreedom = hibiscusTools.calculateFreedom(wordinfo['leftLst'])
         rightfreedom = hibiscusTools.calculateFreedom(wordinfo['rightLst'])
         if leftfreedom<rightfreedom:
             return leftfreedom
         return rightfreedom
-    def getSolidification(self,word): 
-        
+
+    def getSolidification(self,word):
         splitLst = hibiscusTools.splitWord(word)
         wordcount = self.novelInfo[word]['count']
         probability = float(wordcount)/float(self.charCount)
@@ -92,7 +94,8 @@ def excute(name):
     filename = sys.argv[1]
     hibi = Hibiscus()
     hibi.analyseNovel(filename) 
-    hibi.outExcel(filename)  
-	
+    hibi.outExcel(filename)
+
+
 if __name__ == '__main__':
     excute( sys.argv[1:])
